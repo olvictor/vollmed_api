@@ -3,6 +3,8 @@ package com.example.med.controller;
 import com.example.med.DTO.DadosPacientesDTO;
 import com.example.med.model.Paciente;
 import com.example.med.repository.PacienteRepository;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,8 @@ public class PacientesController {
     private PacienteRepository repository;
 
     @PostMapping
-    public void cadastrarPaciente(@RequestBody DadosPacientesDTO dados){
+    @Transactional
+    public void cadastrarPaciente(@RequestBody @Valid DadosPacientesDTO dados){
         repository.save(new Paciente(dados));
     }
 }
