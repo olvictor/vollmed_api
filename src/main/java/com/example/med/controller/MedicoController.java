@@ -7,6 +7,8 @@ import com.example.med.repository.MedicoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class MedicoController {
     }
 
     @GetMapping
-    public List<DadosMedicoResponseDTO> listarMedico(){
-       return repository.findAll().stream().map(DadosMedicoResponseDTO::new).toList();
+    public Page<DadosMedicoResponseDTO> listarMedico(Pageable paginacao){
+       return repository.findAll(paginacao).map(DadosMedicoResponseDTO::new);
     }
 }
