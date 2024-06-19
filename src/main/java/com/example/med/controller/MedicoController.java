@@ -30,7 +30,8 @@ public class MedicoController {
 
     @GetMapping
     public Page<DadosMedicoResponseDTO> listarMedico(@PageableDefault(size = 10, sort = ("nome")) Pageable paginacao){
-       return repository.findAll(paginacao).map(DadosMedicoResponseDTO::new);
+//       return repository.findAll(paginacao).map(DadosMedicoResponseDTO::new);
+         return repository.findAllByAtivoTrue(paginacao).map(DadosMedicoResponseDTO::new);
     }
 
     @PutMapping
@@ -40,4 +41,19 @@ public class MedicoController {
         medico.editarDadosMedico(dados);
 
     }
+
+//    @DeleteMapping("/{id}")
+//    @Transactional
+//    public void excluirMedico(@PathVariable Long id){
+//        repository.deleteById(id);
+//    }
+
+    // EXCLUSAO LOGICA //
+    @DeleteMapping("/{id}")
+    @Transactional
+    public  void exclusaoLogicaDeMedico(@PathVariable Long id){
+        var medico = repository.getReferenceById(id);
+        medico.desativar();
+    }
+
 }

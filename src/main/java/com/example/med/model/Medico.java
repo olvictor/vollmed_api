@@ -29,6 +29,8 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
+    private boolean ativo;
+
     public Medico(DadosMedicosDTO dados) {
         this.nome = dados.nome();
         this.email = dados.email();
@@ -50,4 +52,7 @@ public class Medico {
             }
     }
 
+    public void desativar() {
+        this.ativo = false;
+    }
 }

@@ -8,6 +8,4 @@ public record DadoMedicoEdicaoDTO(
         String nome,
         String telefone,
         DadosEndereco endereco) {
-
-
 }
