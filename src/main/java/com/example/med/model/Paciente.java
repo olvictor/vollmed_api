@@ -45,4 +45,8 @@ public class Paciente {
             endereco.editarDadosEndereco(dados.endereco());
         }
     }
+
+    public void desativar() {
+        this.ativo = false;
+    }
 }
