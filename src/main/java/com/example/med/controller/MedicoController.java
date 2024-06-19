@@ -1,5 +1,6 @@
 package com.example.med.controller;
 
+import com.example.med.DTO.DadoMedicoEdicaoDTO;
 import com.example.med.DTO.DadosMedicoResponseDTO;
 import com.example.med.DTO.DadosMedicosDTO;
 import com.example.med.model.Medico;
@@ -9,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +29,15 @@ public class MedicoController {
     }
 
     @GetMapping
-    public Page<DadosMedicoResponseDTO> listarMedico(Pageable paginacao){
+    public Page<DadosMedicoResponseDTO> listarMedico(@PageableDefault(size = 10, sort = ("nome")) Pageable paginacao){
        return repository.findAll(paginacao).map(DadosMedicoResponseDTO::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public  void editarMedico(@RequestBody @Valid DadoMedicoEdicaoDTO dados){
+        var medico = repository.getReferenceById(dados.id());
+        medico.editarDadosMedico(dados);
+
     }
 }
