@@ -52,4 +52,5 @@ public class Endereco {
             this.uf = endereco.uf();
         }
     }
+
 }
