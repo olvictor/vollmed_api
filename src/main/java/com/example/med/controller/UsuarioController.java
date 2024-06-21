@@ -1,5 +1,6 @@
 package com.example.med.controller;
 
+import com.example.med.DTO.DadosJWTDTO;
 import com.example.med.DTO.DadosLoginDTO;
 import com.example.med.model.Usuario;
 import com.example.med.service.TokenService;
@@ -26,7 +27,7 @@ public class UsuarioController {
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosLoginDTO dados){
         var token = new UsernamePasswordAuthenticationToken(dados.login(),dados.senha());
         var authentication = manager.authenticate(token);
-
-        return  ResponseEntity.ok().body(tokenService.gerarToken((Usuario) authentication.getPrincipal()));
+        var JWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+        return  ResponseEntity.ok().body(new DadosJWTDTO(JWT));
     }
 }
