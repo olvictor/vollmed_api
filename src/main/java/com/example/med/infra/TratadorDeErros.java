@@ -1,5 +1,6 @@
 package com.example.med.infra;
 
+import com.example.med.service.ValidacaoException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -20,6 +21,12 @@ public class TratadorDeErros {
 
         return ResponseEntity.badRequest().body(erros.stream().map(dadosErrosValidation::new));
     }
+
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity tratarErroRegraDeNegocio(ValidacaoException ex){
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
 
     public record dadosErrosValidation(String campo, String mensagem){
         public dadosErrosValidation(FieldError error){
