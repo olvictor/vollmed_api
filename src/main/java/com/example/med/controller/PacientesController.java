@@ -3,6 +3,7 @@ package com.example.med.controller;
 import com.example.med.DTO.*;
 import com.example.med.model.Paciente;
 import com.example.med.repository.PacienteRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
@@ -16,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/pacientes")
+@SecurityRequirement(name = "bearer-key")
 public class PacientesController {
     @Autowired
     private PacienteRepository repository;

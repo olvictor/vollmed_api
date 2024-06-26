@@ -1,8 +1,8 @@
 package com.example.med.controller;
 
 import com.example.med.DTO.DadosCadastroConsultaDTO;
-import com.example.med.DTO.DadosConsultaResponseDTO;
 import com.example.med.service.ConsultaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/consultas")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultasController {
 
     @Autowired

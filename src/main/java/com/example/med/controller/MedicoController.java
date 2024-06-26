@@ -5,6 +5,7 @@ import com.example.med.DTO.DadosMedicoResponseDTO;
 import com.example.med.DTO.DadosMedicosDTO;
 import com.example.med.model.Medico;
 import com.example.med.repository.MedicoRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired
